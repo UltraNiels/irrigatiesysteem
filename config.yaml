@@ -1,0 +1,7 @@
+config:
+  pump_relay_pin: 12
+  moisture_threshold: 0
+  pump_time: 1000
+
+data:
+  times_pumped: 0
