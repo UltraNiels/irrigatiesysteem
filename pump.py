@@ -14,3 +14,4 @@ GPIO.output(18, GPIO.HIGH) # turn on pump
 sleep(c['pump_time'] / 1000)
 GPIO.output(18, GPIO.LOW) # turn off pump
 
+GPIO.cleanup()
