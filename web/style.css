@@ -1,0 +1,36 @@
+body {
+    font-family: Roboto, "Trebuchet MS", Verdana, sans-serif;
+    font-size: 1.5em;s
+}
+
+h1 {
+    font-size: 2em;
+}
+
+#container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-column-gap: 5vh;
+    grid-row-gap: 3vh;
+}
+
+#container div {
+    display: inline;
+}
+
+#pump-button {
+    height: 10vh;
+    width: 100%;
+}
+
+#webcam {
+	height: 21.5vw;
+	width: 100%;
+	border: none;
+}
+
+#edit-button {
+    margin-top: 1vh;
+    height: 5vh;
+    width: 33%;
+}
