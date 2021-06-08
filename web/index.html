@@ -19,6 +19,9 @@
 		        <div> Pomplengte:</div> 				<div id="pump_time"> ... </div> <br>
 		        <div> Pomp pin:</div> 					<div id="pump_relay_pin"> ... </div> <br>
 		        <button id="edit-button" class="button bblue"> Aanpassen </button>
+		        <button id="edit-button" class="button bblue" onclick="socket.emit('reboot')"> Power Off </button>
+		        <button id="edit-button" class="button bblue" onclick="socket.emit('poweroff')"> Reboot </button>
+
 		    </div>
 
 		    <div id="right">

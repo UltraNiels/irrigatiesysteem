@@ -38,11 +38,19 @@ def pump_now(sid):
 	config.writedata()
 
 @sio.event
+def poweroff(sid):
+	subprocess.run(["shutdown", "now"])
+
+@sio.event
+def reboot(sid):
+	subprocess.run(["reboot"])
+
+@sio.event
 def disconnect(sid):
     print('disconnect ', sid)
 
 def run():
-	eventlet.wsgi.server(eventlet.listen(('', 5000)), app)
+	eventlet.wsgi.server(eventlet.listen(('', 80)), app)
 
 run()
 
