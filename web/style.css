@@ -33,9 +33,17 @@ h1 {
 }
 
 #webcam {
-	height: 21.5vw;
+	height: 50vw;
 	width: 100%;
 	border: none;
+}
+
+@media (min-width: 700px) {
+#webcam {
+    height: 21.5vw;
+    width: 100%;
+    border: none;
+}
 }
 
 #edit-button {
