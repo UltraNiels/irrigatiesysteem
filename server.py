@@ -30,7 +30,7 @@ def hello(sid):
 def hello(sid):
    	sio.emit('Data!', dict(c, **d), room=sid)
    	print('datataa')
-   	print('dict(c, **d)')
+   	print(dict(c, **d))
 
 @sio.on('pump_now')
 def pump_now(sid):
