@@ -13,5 +13,5 @@ def loaddata():
 		return yaml.load(df, Loader=yaml.FullLoader)
 
 def writedata(d):
-	with open('config.yaml', 'w') as df:
+	with open('data.yaml', 'w') as df:
 		return yaml.dump(d, df)
