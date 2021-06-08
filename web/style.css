@@ -9,7 +9,7 @@ h1 {
 
 #container {
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 1fr;
     grid-column-gap: 5vh;
     grid-row-gap: 3vh;
 }
@@ -17,10 +17,11 @@ h1 {
 @media (min-width: 700px) {
     #container {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 2fr 1fr;
     grid-column-gap: 5vh;
     grid-row-gap: 3vh;
 }
+
 }
 #container div {
     display: inline;
