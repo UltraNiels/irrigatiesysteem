@@ -35,7 +35,7 @@ def hello(sid):
 def pump_now(sid):
 	pump.pump()
 	d['times_pumped'] += 1
-	config.writedata()
+	config.writedata(d)
 
 @sio.event
 def poweroff(sid):
