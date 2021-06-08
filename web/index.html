@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html> 
     <head>
-        <link href="style.css" rel="stylesheet" type="text/css">
-        <link href="knopjes.css" rel="stylesheet" type="text/css">
+        <link href="/static/style.css" rel="stylesheet" type="text/css">
+        <link href="/static/knopjes.css" rel="stylesheet" type="text/css">
         <title>Kassasyteem</title>
     </head>
     
@@ -15,7 +15,7 @@
 		        <div> Aantal keren gemompt:</div> 		<div id="times_pumped"> ... </div> <br>
 		    	<br>
 		        <div> Automatisch pompen:</div> 		<div id="automatic_pumping"> ... </div> <br>
-		        <div> Threshold:</div> 					<div id="threshold"> ... </div> <br>
+		        <div> Threshold:</div> 					<div id="moisture_threshold"> ... </div> <br>
 		        <div> Pomplengte:</div> 				<div id="pump_time"> ... </div> <br>
 		        <div> Pomp pin:</div> 					<div id="pump_relay_pin"> ... </div> <br>
 		        <button id="edit-button" class="button bblue"> Aanpassen </button>
@@ -23,9 +23,11 @@
 
 		    <div id="right">
 		    	<iframe id="webcam" src="https://dummyimage.com/1080x720/000000/ffffff.png&text=Webcam+(1080*720)"> </iframe> 
-		        <button id="pump-button" class="button bblue">Pomp nu</button>
+		        <button id="pump-button" class="button bblue" onclick="socket.emit('pump_now')">Pomp nu</button>
 		    </div>
 		    
     	</div>
     </body>
+    <script src="/static/socket.io.min.js"></script>
+    <script src="/static/main.js"></script>
 </html>

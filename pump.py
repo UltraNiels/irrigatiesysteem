@@ -1,17 +1,21 @@
-import RPi.GPIO as GPIO
-import yaml
+# import RPi.GPIO as GPIO
+import config
 from time import sleep
 
-with open('config.yaml', 'r') as cf:
-	c = yaml.load(cf, Loader=yaml.FullLoader)
 
-pin = c['pump_relay_pin']
+def pump():
+	c = config.load()
 
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(pin, GPIO.OUT)
+	pin = c['pump_relay_pin']
 
-GPIO.output(pin, GPIO.HIGH) # turn on pump
-sleep(c['pump_time'] / 1000)
-GPIO.output(pin, GPIO.LOW) # turn off pump
+	GPIO.setmode(GPIO.BCM)
+	GPIO.setup(pin, GPIO.OUT)
 
-GPIO.cleanup()
+	GPIO.output(pin, GPIO.HIGH) # turn on pump
+	sleep(c['pump_time'] / 1000)
+	GPIO.output(pin, GPIO.LOW) # turn off pump
+
+	GPIO.cleanup()
+
+if __name__ == '__main__':
+	pump()
