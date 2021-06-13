@@ -1,4 +1,5 @@
 const socket = io();
+let data = {};
 
 socket.emit('Hello?')
 
@@ -13,7 +14,7 @@ socket.on('Hello!', () => {
 })
 
 socket.on('Data!', data => {
-	console.log(data);
+	d = data;
 	for (let d in data) {
 		try{
 		document.getElementById(d).innerHTML = data[d]
@@ -21,3 +22,11 @@ socket.on('Data!', data => {
 		catch{}
 	}
 })
+
+function edit()	{
+	
+}
+
+document.getElementById('edit').addEventListener('click', edit)
+document.getElementById('poweroff').addEventListener('click', ()=>socket.emit('poweroff'))
+document.getElementById('reboot').addEventListener('click', ()=>socket.emit('reboot'))

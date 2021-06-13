@@ -55,6 +55,21 @@ def reboot(sid):
 def disconnect(sid):
     print('disconnect ', sid)
 
+@sio.event
+def enable_autopump(sid):
+    c["automatic_pumping"] = True
+    config.writeconfig(c)
+    if not autopump_thr.is_alive():
+    	autopump_thr.start()
+
+@sio.event
+def disable_autopump(sid):
+    c["automatic_pumping"] = False
+    config.writeconfig(c)
+    if autopump_thr.is_alive():
+    	autopump_thr.terminate()
+
+
 def autopump():
 	while True:
 		if  (time.time() > d["last_time_pumped"] + c["min_interval"]) and (sensor.value > c["threshold"]):
@@ -63,9 +78,9 @@ def autopump():
 			config.writedata(d)
 		time.sleep(1)
 
-autopump_thr = threading.Thread(target=automump, args=(), kwargs={})
+autopump_thr = threading.Thread(target=automump)
 
 if c["automatic_pumping"]:
-	autopump_thr.run()
+	autopump_thr.start()
 
 eventlet.wsgi.server(eventlet.listen(('', 80)), app)
