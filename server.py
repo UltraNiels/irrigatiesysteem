@@ -57,9 +57,15 @@ def disconnect(sid):
 
 def autopump():
 	while True:
-		if sensor.value > c["threshold"] and time.time() > d["last_time_pumped"] + c["min_interval"]:
+		if  (time.time() > d["last_time_pumped"] + c["min_interval"]) and (sensor.value > c["threshold"]):
 			pump_now()
+			d["last_time_pumped"] = time.time()
+			config.writedata(d)
+		time.sleep(1)
 
 autopump_thr = threading.Thread(target=automump, args=(), kwargs={})
+
+if c["automatic_pumping"]:
+	autopump_thr.run()
 
 eventlet.wsgi.server(eventlet.listen(('', 80)), app)
