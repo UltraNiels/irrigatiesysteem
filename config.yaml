@@ -2,3 +2,4 @@ pump_relay_pin: 21
 moisture_threshold: 0
 pump_time: 1000
 automatic_pumping: True
+min_interval: 0

@@ -5,11 +5,16 @@ import threading
 import time
 import pump
 import subprocess
-
-active_clients = 0
+import busio
+import adafruit_ads1x15.ads1015 as ADS
+from adafruit_ads1x15.analog_in import AnalogIn
 
 c = config.load()
 d = config.loaddata()
+
+i2c = busio.I2C(board.SCL, board.SDA)
+ads = ADS.ADS1015(i2c)
+sensor = AnalogIn(ads, ADS.P0)
 
 sio = socketio.Server()
 app = socketio.WSGIApp(sio, static_files={
@@ -29,7 +34,7 @@ def hello(sid):
 
 @sio.on('Data?')
 def hello(sid):
-   	sio.emit('Data!', dict(c, **d), room=sid)
+   	sio.emit('Data!', dict(c, **d, moisture=sensor.value), room=sid)
    	print('datataa')
 
 @sio.on('pump_now')
@@ -50,9 +55,11 @@ def reboot(sid):
 def disconnect(sid):
     print('disconnect ', sid)
 
-def run():
-	eventlet.wsgi.server(eventlet.listen(('', 80)), app)
+def autopump():
+	while True:
+		if sensor.value > c["threshold"] and time.time() > d["last_time_pumped"] + c["min_interval"]:
+			pump_now()
 
-run()
+autopump_thr = threading.Thread(target=automump, args=(), kwargs={})
 
-thr = threading.Thread(target=run, args=(), kwargs={})
+eventlet.wsgi.server(eventlet.listen(('', 80)), app)
